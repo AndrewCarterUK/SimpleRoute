@@ -1,0 +1,18 @@
+{
+    "name": "andrewcarteruk/simple-route",
+    "description": "An easy to use wrapper for the FastRoute package",
+    "keywords": ["routing", "router", "simple", "route", "fast"],
+    "license": "MIT",
+    "authors": [{
+        "name": "Andrew Carter",
+        "email": "andrewcarter1992@gmail.com"
+    }],
+    "require": {
+        "nikic/fast-route": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleRoute\\": "src/"
+        }
+    }
+}
