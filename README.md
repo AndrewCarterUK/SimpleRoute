@@ -63,12 +63,14 @@ The `$method` is an uppercase HTTP method string for which a certain route
 should match. It is possible to specify multiple valid methods using an array:
 
 ```php
-// These two routes
-$route1 = new Route('GET', '/test', 'handler');
-$route2 = new Route('POST', '/test', 'handler');
+$routes = [
+    // This route
+    new Route(['GET', 'POST'], '/test', 'handler'),
 
-// Are (together) equivalent to this route
-$route3 = new Route(['GET', 'POST'], '/test', 'handler');
+    // Is equivalent to these two routes together
+    new Route('GET', '/test', 'handler'),
+    new Route('POST', '/test', 'handler'),
+];
 ```
 
 By default the `$pattern` uses a syntax where `{foo}` specifies a placeholder
@@ -78,14 +80,16 @@ placeholder matches, you can specify a custom pattern by writing `{bar:[0-9]+}`.
 Some examples:
 
 ```php
-// Matches /user/42, but not /user/xyz
-$route = new Route('GET', '/user/{id:\d+}', 'handler');
+$routes = [
+    // Matches /user/42, but not /user/xyz
+    new Route('GET', '/user/{id:\d+}', 'handler'),
 
-// Matches /user/foobar, but not /user/foo/bar
-$route = new Route('GET', '/user/{name}', 'handler');
+    // Matches /user/foobar, but not /user/foo/bar
+    new Route('GET', '/user/{name}', 'handler'),
 
-// Matches /user/foo/bar as well
-$route = new Route('GET', '/user/{name:.+}', 'handler');
+    // Matches /user/foo/bar as well
+    new Route('GET', '/user/{name:.+}', 'handler'),
+];
 ```
 
 Custom patterns for route placeholders cannot use capturing groups. For example
@@ -97,15 +101,17 @@ that `/foo[bar]` will match both `/foo` and `/foobar`. Optional parts are only
 supported in a trailing position, not in the middle of a route.
 
 ```php
-// This route
-$route1 = new Route('GET', '/user/{id:\d+}[/{name}]', 'handler');
+$routes = [
+    // This route
+    new Route('GET', '/user/{id:\d+}[/{name}]', 'handler'),
 
-// Is equivalent to these two routes together
-$route2 = new Route('GET', '/user/{id:\d+}', 'handler');
-$route3 = new Route('GET', '/user/{id:\d+}/{name}', 'handler');
+    // Is equivalent to these two routes together
+    new Route('GET', '/user/{id:\d+}', 'handler'),
+    new Route('GET', '/user/{id:\d+}/{name}', 'handler'),
 
-// This route is NOT valid, because optional parts can only occur at the end
-$route4 = new Route('GET', '/user[/{id:\d+}]/{name}', 'handler');
+    // This route is NOT valid, because optional parts can only occur at the end
+    new Route('GET', '/user[/{id:\d+}]/{name}', 'handler'),
+];
 ```
 
 The `$handler` parameter does not necessarily have to be a callback, it could
