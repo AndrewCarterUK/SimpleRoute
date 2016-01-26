@@ -27,8 +27,7 @@ use SimpleRoute\Router;
 
 $router = new Router([
     new Route('GET', '/', 'handler1'),
-    new Route(['GET', 'POST'], '/contact', 'handler2'),
-    new Route('GET', '/{page}', 'handler3'),
+    new Route('GET', '/{page}', 'handler2'),
 ]);
 
 try {
