@@ -29,13 +29,13 @@ final class Router implements RouterInterface
 
         $this->dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $collector) use ($routes) {
             foreach ($routes as $route) {
-                $key = spl_object_hash($route);
-
-                $this->routes[$key] = $route;
-
                 if (!$route instanceof RouteInterface) {
                     throw new \InvalidArgumentException('Routes array must contain only RouteInterface objects');
                 }
+
+                $key = spl_object_hash($route);
+
+                $this->routes[$key] = $route;
 
                 $collector->addRoute(
                     $route->getMethods(),
