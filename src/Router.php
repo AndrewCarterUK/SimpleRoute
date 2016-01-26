@@ -50,17 +50,12 @@ final class Router implements RouterInterface
         $routeInfo = $this->dispatcher->dispatch($method, $uri);
 
         switch ($routeInfo[0]) {
-            case Dispatcher::FOUND:
-                $result = new Result($this->routes[$routeInfo[1]], $routeInfo[2]);
-                break;
-
             case Dispatcher::METHOD_NOT_ALLOWED:
                 throw new MethodNotAllowedException($method, $routeInfo[1]);
-
             case Dispatcher::NOT_FOUND:
                 throw new NotFoundException($uri);
         }
 
-        return $result;
+        return new Result($this->routes[$routeInfo[1]], $routeInfo[2]);
     }
 }
