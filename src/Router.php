@@ -21,6 +21,9 @@ final class Router implements RouterInterface
     private $routes;
 
     /**
+     * This method is not part of the public API. Implementations should use
+     * Router::fromArray().
+     * 
      * @param RouteInterface[] A collection of routes
      */
     public function __construct(array $routes)
@@ -40,6 +43,15 @@ final class Router implements RouterInterface
                 $collector->addRoute($route->getMethods(), $route->getPattern(), $key);
             }
         });
+    }
+
+    /**
+     * @param RouteInterface[] A collection of routes
+     * @return self
+     */
+    public static function fromArray(array $routes)
+    {
+        return new self($routes);
     }
 
     /**

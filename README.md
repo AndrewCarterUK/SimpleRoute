@@ -16,7 +16,7 @@ By [AndrewCarterUK ![(Twitter)](http://i.imgur.com/wWzX9uB.png)](https://twitter
 Install using [Composer](https://getcomposer.org).
 
 ```bash
-composer require andrewcarteruk/simple-route ^0.1
+composer require andrewcarteruk/simple-route ^0.2
 ```
 
 ## Example Usage
@@ -25,7 +25,7 @@ composer require andrewcarteruk/simple-route ^0.1
 use SimpleRoute\Route;
 use SimpleRoute\Router;
 
-$router = new Router([
+$router = Router::fromArray([
     new Route('GET', '/', 'handler1'),
     new Route('GET', '/{page}', 'handler2'),
 ]);
@@ -50,7 +50,7 @@ _The following documentation is derived from the [FastRoute](https://github.com/
 documentation._
 
 Routes are defined as an array of `SimpleRoute\Route` objects that are passed to
-the constructor of `SimpleRoute\Router`.
+`SimpleRoute\Router::fromArray(array $routes)`.
 
 `SimpleRoute\Route` objects require a `$method`, a `$pattern` and a `$handler`:
 

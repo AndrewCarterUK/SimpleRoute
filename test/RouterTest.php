@@ -10,7 +10,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMatch()
     {
         $route = new Route('GET', '/foo', 'foo');
-        $router = new Router(array($route));
+        $router = Router::fromArray(array($route));
         $result = $router->match('GET', '/foo');
 
         $this->assertSame($route, $result->getRoute());
@@ -19,7 +19,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testParams()
     {
         $route = new Route('GET', '/user/{id:\d+}', 'foo');
-        $router = new Router(array($route));
+        $router = Router::fromArray(array($route));
         $result = $router->match('GET', '/user/1');
 
         $this->assertEquals(array('id' => '1'), $result->getParams());
@@ -30,7 +30,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidRoutes()
     {
-        $router = new Router(array('foo', 'bar'));
+        $router = Router::fromArray(array('foo', 'bar'));
     }
 
     /**
@@ -38,7 +38,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotFound()
     {
-        $router = new Router(array());
+        $router = Router::fromArray(array());
         $router->match('GET', '/foo');
     }
 
@@ -47,7 +47,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodNotAllowed()
     {
-        $router = new Router(array(
+        $router = Router::fromArray(array(
             new Route('GET', '/foo', 'foo')
         ));
         $router->match('POST', '/foo');
