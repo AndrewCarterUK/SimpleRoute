@@ -16,7 +16,7 @@ final class Router implements RouterInterface
     private $dispatcher;
 
     /**
-     * @var RouteInterface
+     * @var RouteInterface[]
      */
     private $routes;
 
