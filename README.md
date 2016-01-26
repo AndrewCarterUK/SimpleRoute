@@ -22,8 +22,6 @@ composer require andrewcarteruk/simple-route ^0.1
 ## Example Usage
 
 ```php
-use SimpleRoute\Exception\MethodNotAllowedException;
-use SimpleRoute\Exception\NotFoundException;
 use SimpleRoute\Route;
 use SimpleRoute\Router;
 
@@ -37,10 +35,87 @@ try {
     $result = $router->match($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
     $handler = $result->getHandler();
+    $params = $result->getParams();
+
     // ...
-} catch (NotFoundException $exception) {
+} catch (SimpleRoute\Exception\NotFoundException $exception) {
     // ...
-} catch (MethodNotAllowedException $exception) {
+} catch (SimpleRoute\Exception\MethodNotAllowedException $exception) {
     // ...
 }
 ```
+
+## Documentation
+
+_The following documentation is derived from the [FastRoute](https://github.com/nikic/FastRoute#defining-routes)
+documentation._
+
+Routes are defined as an array of `SimpleRoute\Route` objects that are passed to
+the constructor of `SimpleRoute\Router`.
+
+`SimpleRoute\Route` objects require a `$method`, a `$pattern` and a `$handler`:
+
+```php
+$route = new Route($method, $pattern, $handler);
+```
+
+The `$method` is an uppercase HTTP method string for which a certain route
+should match. It is possible to specify multiple valid methods using an array:
+
+```php
+// These two routes
+$route1 = new Route('GET', '/test', 'handler');
+$route2 = new Route('POST', '/test', 'handler');
+
+// Are (together) equivalent to this route
+$route3 = new Route(['GET', 'POST'], '/test', 'handler');
+```
+
+By default the `$pattern` uses a syntax where `{foo}` specifies a placeholder
+with name `foo` and matching the regex `[^/]+`. To adjust the pattern the
+placeholder matches, you can specify a custom pattern by writing `{bar:[0-9]+}`.
+
+Some examples:
+
+```php
+// Matches /user/42, but not /user/xyz
+$route = new Route('GET', '/user/{id:\d+}', 'handler');
+
+// Matches /user/foobar, but not /user/foo/bar
+$route = new Route('GET', '/user/{name}', 'handler');
+
+// Matches /user/foo/bar as well
+$route = new Route('GET', '/user/{name:.+}', 'handler');
+```
+
+Custom patterns for route placeholders cannot use capturing groups. For example
+`{lang:(en|de)}` is not a valid placeholder, because `()` is a capturing group.
+Instead you can use either `{lang:en|de}` or `{lang:(?:en|de)}`.
+
+Furthermore parts of the route enclosed in `[...]` are considered optional, so
+that `/foo[bar]` will match both `/foo` and `/foobar`. Optional parts are only
+supported in a trailing position, not in the middle of a route.
+
+```php
+// This route
+$route1 = new Route('GET', '/user/{id:\d+}[/{name}]', 'handler');
+
+// Is equivalent to these two routes together
+$route2 = new Route('GET', '/user/{id:\d+}', 'handler');
+$route3 = new Route('GET', '/user/{id:\d+}/{name}', 'handler');
+
+// This route is NOT valid, because optional parts can only occur at the end
+$route4 = new Route('GET', '/user[/{id:\d+}]/{name}', 'handler');
+```
+
+The `$handler` parameter does not necessarily have to be a callback, it could
+also be a controller class name or any other kind of data you wish to associate
+with the route. SimpleRoute only tells you which handler corresponds to your
+URI, how you interpret it is up to you.
+
+### Credits
+
+This library is merely a wrapper for [FastRoute](https://github.com/nikic/FastRoute)
+that aims to provide an easier to use API.
+
+The author of [FastRoute](https://github.com/nikic/FastRoute) is [Nikita Popov](http://nikic.github.io/).
