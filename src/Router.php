@@ -37,11 +37,7 @@ final class Router implements RouterInterface
 
                 $this->routes[$key] = $route;
 
-                $collector->addRoute(
-                    $route->getMethods(),
-                    $route->getPattern(),
-                    $key
-                );
+                $collector->addRoute($route->getMethods(), $route->getPattern(), $key);
             }
         });
     }
@@ -51,15 +47,20 @@ final class Router implements RouterInterface
      */
     public function match($method, $uri)
     {
-        $result = $this->dispatcher->dispatch($method, $uri);
+        $routeInfo = $this->dispatcher->dispatch($method, $uri);
 
-        switch ($result[0]) {
+        switch ($routeInfo[0]) {
             case Dispatcher::FOUND:
-                return new Result($this->routes[$result[1]], $result[2]); 
+                $result = new Result($this->routes[$routeInfo[1]], $routeInfo[2]);
+                break;
+
             case Dispatcher::METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException($method, $result[1]);
+                throw new MethodNotAllowedException($method, $routeInfo[1]);
+
             case Dispatcher::NOT_FOUND:
                 throw new NotFoundException($uri);
         }
+
+        return $result;
     }
 }
