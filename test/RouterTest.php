@@ -26,6 +26,14 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidRoutes()
+    {
+        $router = new Router(array('foo', 'bar'));
+    }
+
+    /**
      * @expectedException SimpleRoute\Exception\NotFoundException
      */
     public function testNotFound()
