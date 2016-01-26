@@ -1,7 +1,7 @@
 # SimpleRoute
 
 [![Build Status](https://travis-ci.org/AndrewCarterUK/SimpleRoute.svg?branch=master)](https://travis-ci.org/AndrewCarterUK/SimpleRoute)
-[![Code Coverage](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/badges/coverage.png?b=master&no-cache=1)](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AndrewCarterUK/SimpleRoute/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/andrewcarteruk/simple-route/v/stable)](https://packagist.org/packages/andrewcarteruk/simple-route)
 [![Total Downloads](https://poser.pugx.org/andrewcarteruk/simple-route/downloads)](https://packagist.org/packages/andrewcarteruk/simple-route)
