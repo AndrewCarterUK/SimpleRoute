@@ -14,6 +14,7 @@ final class Route implements RouteInterface
         'PATCH',
         'DELETE',
         'HEAD',
+        'OPTION',
     ];
 
     /**
