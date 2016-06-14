@@ -5,6 +5,18 @@ namespace SimpleRoute;
 final class Route implements RouteInterface
 {
     /**
+     * @var array
+     */
+    private static $availableMethods = [
+        'GET',
+        'POST',
+        'PUT',
+        'PATCH',
+        'DELETE',
+        'HEAD',
+    ];
+
+    /**
      * @var string[]
      */
     private $methods;
