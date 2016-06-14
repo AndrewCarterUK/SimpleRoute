@@ -49,6 +49,29 @@ final class Route implements RouteInterface
     }
 
     /**
+     * @param string $method    The HTTP method type
+     * @param string $arguments The arguments to allow __construct to be called
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return Route
+     */
+    public static function __callStatic($method, $arguments)
+    {
+        if (in_array($method, static::$availableMethods) === false) {
+            throw new \InvalidArgumentException(
+                sprintf('%s is not a valid method', $method)
+            );
+        }
+
+        list($pattern, $handler) = $arguments;
+
+        return new self(
+            $method, $pattern, $handler
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getMethods()
