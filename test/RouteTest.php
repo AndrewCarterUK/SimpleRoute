@@ -66,30 +66,4 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $route->getPattern());
         $this->assertEquals('foo', $route->getHandler());
     }
-
-    public function testRouteHasHEADMethod()
-    {
-        $route = Route::HEAD('/foo', 'foo');
-
-        $this->assertEquals(array('HEAD'), $route->getMethods());
-        $this->assertEquals('/foo', $route->getPattern());
-        $this->assertEquals('foo', $route->getHandler());
-    }
-
-    public function testRouteHasOPTIONMethod()
-    {
-        $route = Route::OPTION('/foo', 'foo');
-
-        $this->assertEquals(array('OPTION'), $route->getMethods());
-        $this->assertEquals('/foo', $route->getPattern());
-        $this->assertEquals('foo', $route->getHandler());
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testInvalidStaticMethodCalled()
-    {
-        Route::WOW('/whoops', 'error');
-    }
 }
