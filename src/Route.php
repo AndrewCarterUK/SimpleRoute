@@ -38,7 +38,7 @@ final class Route implements RouteInterface
 
     /**
      * @param string $pattern The URI pattern
-     * @param string $handler The handler
+     * @param mixed  $handler The handler
      *
      * @return Route
      */
@@ -49,7 +49,7 @@ final class Route implements RouteInterface
 
     /**
      * @param string $pattern The URI pattern
-     * @param string $handler The handler
+     * @param mixed  $handler The handler
      *
      * @return Route
      */
@@ -60,7 +60,7 @@ final class Route implements RouteInterface
 
     /**
      * @param string $pattern The URI pattern
-     * @param string $handler The handler
+     * @param mixed  $handler The handler
      *
      * @return Route
      */
@@ -71,7 +71,7 @@ final class Route implements RouteInterface
 
     /**
      * @param string $pattern The URI pattern
-     * @param string $handler The handler
+     * @param mixed  $handler The handler
      *
      * @return Route
      */
@@ -82,7 +82,7 @@ final class Route implements RouteInterface
 
     /**
      * @param string $pattern The URI pattern
-     * @param string $handler The handler
+     * @param mixed  $handler The handler
      *
      * @return Route
      */
