@@ -21,4 +21,49 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('GET', 'POST'), $route->getMethods());
     }
+
+    public function testRouteHasGETMethod()
+    {
+        $route = Route::GET('/foo', 'foo');
+
+        $this->assertEquals(array('GET'), $route->getMethods());
+        $this->assertEquals('/foo', $route->getPattern());
+        $this->assertEquals('foo', $route->getHandler());
+    }
+
+    public function testRouteHasPOSTMethod()
+    {
+        $route = Route::POST('/foo', 'foo');
+
+        $this->assertEquals(array('POST'), $route->getMethods());
+        $this->assertEquals('/foo', $route->getPattern());
+        $this->assertEquals('foo', $route->getHandler());
+    }
+
+    public function testRouteHasPUTMethod()
+    {
+        $route = Route::PUT('/foo', 'foo');
+
+        $this->assertEquals(array('PUT'), $route->getMethods());
+        $this->assertEquals('/foo', $route->getPattern());
+        $this->assertEquals('foo', $route->getHandler());
+    }
+
+    public function testRouteHasPATCHMethod()
+    {
+        $route = Route::PATCH('/foo', 'foo');
+
+        $this->assertEquals(array('PATCH'), $route->getMethods());
+        $this->assertEquals('/foo', $route->getPattern());
+        $this->assertEquals('foo', $route->getHandler());
+    }
+
+    public function testRouteHasDELETEMethod()
+    {
+        $route = Route::DELETE('/foo', 'foo');
+
+        $this->assertEquals(array('DELETE'), $route->getMethods());
+        $this->assertEquals('/foo', $route->getPattern());
+        $this->assertEquals('foo', $route->getHandler());
+    }
 }

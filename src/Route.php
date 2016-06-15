@@ -37,6 +37,63 @@ final class Route implements RouteInterface
     }
 
     /**
+     * @param string $pattern The URI pattern
+     * @param mixed  $handler The handler
+     *
+     * @return Route
+     */
+    public static function GET($pattern, $handler)
+    {
+        return new self(['GET'], $pattern, $handler);
+    }
+
+    /**
+     * @param string $pattern The URI pattern
+     * @param mixed  $handler The handler
+     *
+     * @return Route
+     */
+    public static function POST($pattern, $handler)
+    {
+        return new self(['POST'], $pattern, $handler);
+    }
+
+    /**
+     * @param string $pattern The URI pattern
+     * @param mixed  $handler The handler
+     *
+     * @return Route
+     */
+    public static function PUT($pattern, $handler)
+    {
+        return new self(['PUT'], $pattern, $handler);
+    }
+
+    /**
+     * @param string $pattern The URI pattern
+     * @param mixed  $handler The handler
+     *
+     * @return Route
+     */
+    public static function PATCH($pattern, $handler)
+    {
+        return new self(['PATCH'], $pattern, $handler);
+    }
+
+    /**
+     * @param string $pattern The URI pattern
+     * @param mixed  $handler The handler
+     *
+     * @return Route
+     */
+    public static function DELETE($pattern, $handler)
+    {
+        return new self(['DELETE'], $pattern, $handler);
+    }
+
+
+
+    /**
      * {@inheritdoc}
      */
     public function getMethods()
